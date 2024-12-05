@@ -9,24 +9,11 @@
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
 
-<h2>Add a comment:</h2>
-
-<%= form_for([@post, @post.comments.build]) do |form| %>
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<<h2>Add a comment:</h2>
+<%= render "comments/form" %>
 
 <h2>Comments</h2>
-
-<% @post.comments.each do |comment| %>
-  <p><%= comment.body %></p>
-<% end %>
+<%= render @post.comments %>
 
 <p>
   <strong>Author:</strong>
