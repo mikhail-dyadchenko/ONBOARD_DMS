@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_04_232705) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_05_091016) do
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.datetime "datetime"
@@ -22,6 +28,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_232705) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "communities", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "logo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -31,6 +45,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_232705) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.string "avatar"
+    t.text "bio"
+    t.string "contact"
+    t.integer "rating"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +80,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_04_232705) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
 end
