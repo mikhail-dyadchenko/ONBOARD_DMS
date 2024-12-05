@@ -2,6 +2,12 @@
 
 <% content_for :title, "Posts" %>
 
+
+<h1>Users</h1>
+<% @users.each do |user| %>
+  <p><%= user.email %></p>
+<% end %>
+
 <h1>Posts</h1>
 
 <div id="posts">
